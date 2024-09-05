@@ -8,7 +8,7 @@
 - 1년동안 잘 부탁드립니다-!
 
 <details>
-<summary>4주차 db 스탠다드 과제입니다!</summary>
+<summary>1주차 과제입니다!</summary>
 <div markdown="1">
 
 - "/health" 엔드포인트로 health check를 하는 모습입니다.
