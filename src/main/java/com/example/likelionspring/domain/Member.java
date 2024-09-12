@@ -1,13 +1,15 @@
 package com.example.likelionspring.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.example.likelionspring.domain.music.Likes;
+import com.example.likelionspring.domain.music.Playlist;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -30,4 +32,11 @@ public class Member extends BaseTimeEntity {
         this.email = email;
         this.age = age;
     }
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Playlist> playlists = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Likes> likes = new ArrayList<>();
+
 }
