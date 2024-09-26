@@ -29,4 +29,14 @@ public class MemberService {
             System.out.println("ID: " + member.getId() + ", Username: " + member.getUsername());
         }
     }
+
+    public Page<Member> getMembersByAgeGreater(int age, int page, int size){
+        Pageable pageable = PageRequest.of(page, size, Sort.by("username").ascending());
+        return memberRepository.findByAgeGreaterThanEqual(age, pageable);
+    }
+
+    public Page<Member> getMembersByUsernamePrefix(String prefix, int page, int size){
+        Pageable pageable = PageRequest.of(page, size, Sort.by("username").ascending());
+        return memberRepository.findByUsernameStartingWith(prefix, pageable);
+    }
 }
