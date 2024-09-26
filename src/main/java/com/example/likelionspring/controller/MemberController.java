@@ -21,7 +21,7 @@ public class MemberController {
 
     @GetMapping("/members/age")
     public Page<Member> getMembersByAgeGreater(@RequestParam int age, @RequestParam int page, @RequestParam int size) {
-        return memberService.getMembersByAgeGreater(age, page, size);
+        return memberService.getMembersByAgeGreaterthan20(page, size);
     }
 
     @GetMapping("/members/username")

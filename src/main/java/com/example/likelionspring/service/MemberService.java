@@ -30,9 +30,10 @@ public class MemberService {
         }
     }
 
-    public Page<Member> getMembersByAgeGreater(int age, int page, int size){
+    public Page<Member> getMembersByAgeGreaterthan20(int page, int size){
         Pageable pageable = PageRequest.of(page, size, Sort.by("username").ascending());
-        return memberRepository.findByAgeGreaterThanEqual(age, pageable);
+        int fixedAge = 20;
+        return memberRepository.findByAgeGreaterThanEqual(fixedAge, pageable);
     }
 
     public Page<Member> getMembersByUsernamePrefix(String prefix, int page, int size){
