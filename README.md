@@ -22,5 +22,12 @@
 </details>
 
 
+<details>
+<summary>2주차 과제입니다!</summary>
+<div markdown="1">
 
+- <스탠다드 과제> table이 잘 생성된 모습
+  <img width="697" alt="image" src="https://github.com/user-attachments/assets/b62d0a2a-3ef2-4bdd-98ec-3485f0ea9ad0">
 
+</div>
+</details>
