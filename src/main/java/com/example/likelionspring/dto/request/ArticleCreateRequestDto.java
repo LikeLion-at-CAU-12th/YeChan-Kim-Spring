@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class ArticleCreateRequestDto {
-    private Long id;
+    private Long memberId;
     private String title;
     private String content;
     private List<Long> categoryIds;
