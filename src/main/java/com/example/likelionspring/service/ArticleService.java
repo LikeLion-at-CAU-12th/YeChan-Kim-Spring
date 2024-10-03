@@ -2,6 +2,8 @@ package com.example.likelionspring.service;
 
 import com.example.likelionspring.domain.*;
 import com.example.likelionspring.dto.request.ArticleCreateRequestDto;
+import com.example.likelionspring.dto.request.ArticleUpdateRequest;
+import com.example.likelionspring.dto.response.ArticleResponseDto;
 import com.example.likelionspring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleService {
@@ -57,4 +60,28 @@ public class ArticleService {
         }
         return article.getId();
     }
+
+    public List<ArticleResponseDto> findArticlesByMemberId(Long memberId){
+        List<Article> articles = articleJpaRepository.findByMemberId(memberId);
+        return articles.stream()
+                .map(article -> new ArticleResponseDto(article.getId(), article.getTitle(), article.getContent()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Long updateArticle(Long articleId, ArticleUpdateRequest request) {
+        Article existingArticle = articleJpaRepository.findById(articleId)
+                .orElseThrow(() -> new RuntimeException("해당 ID의 게시물이 없습니다."));
+
+        Article updatedArticle = Article.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .member(existingArticle.getMember())
+                .comments(existingArticle.getComments())
+                .build();
+        articleJpaRepository.save(updatedArticle);
+
+        return updatedArticle.getId();
+    }
+
 }
