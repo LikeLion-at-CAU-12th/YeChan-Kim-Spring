@@ -70,18 +70,34 @@ public class ArticleService {
 
     @Transactional
     public Long updateArticle(Long articleId, ArticleUpdateRequest request) {
+        // 기존 Article 엔티티 조회
         Article existingArticle = articleJpaRepository.findById(articleId)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 게시물이 없습니다."));
 
-        Article updatedArticle = Article.builder()
-                .title(request.getTitle())
-                .content(request.getContent())
-                .member(existingArticle.getMember())
-                .comments(existingArticle.getComments())
-                .build();
-        articleJpaRepository.save(updatedArticle);
+        // 기존 Article 엔티티의 title과 content 필드만 업데이트 (comments 컬렉션은 변경하지 않음)
+        existingArticle.setTitle(request.getTitle());
+        existingArticle.setContent(request.getContent());
 
-        return updatedArticle.getId();
+        // 변경 사항을 저장
+        articleJpaRepository.save(existingArticle);
+
+        return existingArticle.getId();
+    }
+
+    @Transactional
+    public void deleteArticle(Long articleId) {
+        Article article = articleJpaRepository.findById(articleId)
+                .orElseThrow(() -> new RuntimeException("해당 ID의 게시물이 없습니다."));
+
+        List<CategoryArticle> categoryArticles = categoryArticleJpaRepository.findByArticle(article);
+
+        if (!categoryArticles.isEmpty()) {
+            categoryArticleJpaRepository.deleteAll();
+        }
+
+        articlelogJpaRepository.deleteByArticle(article);
+
+        articleJpaRepository.delete(article);
     }
 
 }

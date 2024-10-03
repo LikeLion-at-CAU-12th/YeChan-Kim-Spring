@@ -1,6 +1,7 @@
 package com.example.likelionspring.controller;
 
 import com.example.likelionspring.dto.request.ArticleCreateRequestDto;
+import com.example.likelionspring.dto.request.ArticleUpdateRequest;
 import com.example.likelionspring.dto.response.ArticleResponseDto;
 import com.example.likelionspring.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,15 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
+    @PutMapping("/{articleId}")
+    public ResponseEntity<Long> updateArticle(@PathVariable Long articleId, @RequestBody ArticleUpdateRequest request){
+        Long updatedArticleId = articleService.updateArticle(articleId, request);
+        return ResponseEntity.ok(updatedArticleId);
+    }
+
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long articleId) {
+        articleService.deleteArticle(articleId);
+        return ResponseEntity.noContent().build();
+    }
 }
