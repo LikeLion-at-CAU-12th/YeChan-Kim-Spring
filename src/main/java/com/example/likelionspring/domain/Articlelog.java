@@ -2,6 +2,7 @@ package com.example.likelionspring.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +21,11 @@ public class Articlelog {
     @OneToOne(cascade = ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
+
+    @Builder
+    public Articlelog(String title, String content, Article article){
+        this.title = title;
+        this.content = content;
+        this.article = article;
+    }
 }
