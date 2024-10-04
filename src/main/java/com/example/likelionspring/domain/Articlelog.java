@@ -20,9 +20,8 @@ public class Articlelog {
     private String title;
     private String content;
 
-    @OneToOne(cascade = ALL, fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "article_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
     @Builder

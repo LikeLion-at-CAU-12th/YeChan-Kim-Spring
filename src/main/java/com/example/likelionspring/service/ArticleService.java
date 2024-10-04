@@ -74,12 +74,37 @@ public class ArticleService {
         Article existingArticle = articleJpaRepository.findById(articleId)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 게시물이 없습니다."));
 
-        // 기존 Article 엔티티의 title과 content 필드만 업데이트 (comments 컬렉션은 변경하지 않음)
+
+        // Article 업데이트
         existingArticle.setTitle(request.getTitle());
         existingArticle.setContent(request.getContent());
 
-        // 변경 사항을 저장
+        // Article 저장 (한 번만 수행)
         articleJpaRepository.save(existingArticle);
+
+        // 로그 생성
+        Articlelog articlelog = Articlelog.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .article(existingArticle)
+                .build();
+        articlelogJpaRepository.save(articlelog);
+
+        // 카테고리 관계 업데이트
+        List<CategoryArticle> existingCategoryArticles = categoryArticleJpaRepository.findByArticle(existingArticle);
+        categoryArticleJpaRepository.deleteAll(existingCategoryArticles);
+
+        if (request.getCategoryIds() != null && !request.getCategoryIds().isEmpty()) {
+            for (Long categoryId : request.getCategoryIds()) {
+                Category category = categoryJpaRepository.findById(categoryId)
+                        .orElseThrow(() -> new RuntimeException("해당 ID를 가진 카테고리가 없습니다."));
+                CategoryArticle categoryArticle = CategoryArticle.builder()
+                        .category(category)
+                        .article(existingArticle)
+                        .build();
+                categoryArticleJpaRepository.save(categoryArticle);
+            }
+        }
 
         return existingArticle.getId();
     }
@@ -89,14 +114,13 @@ public class ArticleService {
         Article article = articleJpaRepository.findById(articleId)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 게시물이 없습니다."));
 
-        List<CategoryArticle> categoryArticles = categoryArticleJpaRepository.findByArticle(article);
+        // CategoryArticle 삭제
+        categoryArticleJpaRepository.deleteByArticle(article);
 
-        if (!categoryArticles.isEmpty()) {
-            categoryArticleJpaRepository.deleteAll();
-        }
-
+        // Articlelog 삭제
         articlelogJpaRepository.deleteByArticle(article);
 
+        // Article 삭제
         articleJpaRepository.delete(article);
     }
 
