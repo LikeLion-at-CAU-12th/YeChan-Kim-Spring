@@ -10,7 +10,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -23,10 +22,6 @@ public class Article {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
@@ -36,5 +31,13 @@ public class Article {
         this.content = content;
         this.member = member;
         this.comments = comments != null ? comments : new ArrayList<>();
+    }
+
+    public void updateTitle(String title){
+        this.title = title;
+    }
+
+    public void updateContent(String content){
+        this.content = content;
     }
 }
