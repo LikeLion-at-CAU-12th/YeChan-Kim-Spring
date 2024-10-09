@@ -1,12 +1,16 @@
 package com.example.likelionspring.controller;
 
+import com.example.likelionspring.domain.Article;
 import com.example.likelionspring.dto.request.ArticleCreateRequestDto;
+import com.example.likelionspring.dto.request.ArticleUpdateRequest;
 import com.example.likelionspring.dto.response.ArticleResponseDto;
 import com.example.likelionspring.service.ArticleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,4 +38,15 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
+    @PutMapping("/{articleId}")
+    public ResponseEntity<ArticleResponseDto> updateArticle(@PathVariable Long articleId, @Valid @RequestBody ArticleUpdateRequest request){
+        ArticleResponseDto article = articleService.updateArticle(articleId, request);
+        return ResponseEntity.ok(article);
+    }
+
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long articleId) {
+        articleService.deleteArticle(articleId);
+        return ResponseEntity.noContent().build();
+    }
 }

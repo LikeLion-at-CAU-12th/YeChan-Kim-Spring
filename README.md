@@ -52,3 +52,26 @@
 
 </div>
 </details>
+
+<details>
+<summary>4주차 과제입니다!</summary>
+<div markdown="1">
+
+- <실습> Create
+
+  <img width="659" alt="image" src="https://github.com/user-attachments/assets/6f7c3af2-ebf7-4bed-927c-9eb1835fee68">
+
+- <실습> Read
+
+  <img width="673" alt="image" src="https://github.com/user-attachments/assets/532e1819-345b-416c-a5ed-f55416e415ef">
+
+- <스탠다드 과제> 1. Update
+
+  <img width="650" alt="image" src="https://github.com/user-attachments/assets/038f1f49-b927-40ba-b8e4-23f9350a73fb">
+
+- <스탠다드 과제> 2. Delete
+
+  <img width="674" alt="image" src="https://github.com/user-attachments/assets/a958636c-b4cc-487f-b0f5-510a624427f7">
+
+</div>
+</details>

@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import static jakarta.persistence.CascadeType.ALL;
 
@@ -18,8 +20,8 @@ public class Articlelog {
     private String title;
     private String content;
 
-    @OneToOne(cascade = ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
     @Builder

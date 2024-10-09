@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ArticlelogJpaRepository extends JpaRepository<Articlelog, Long> {
     Optional<Articlelog> findByArticle(Article article);
+
+    void deleteByArticle(Article article);
 }
