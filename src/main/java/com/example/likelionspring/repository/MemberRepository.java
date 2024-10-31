@@ -11,9 +11,11 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    List<Member> findByUsername(String username);
+    Member findByUsername(String username);
 
     Page<Member> findByAgeGreaterThanEqual(int age, Pageable pageable);
 
     Page<Member> findByUsernameStartingWith(String prefix, Pageable pageable);
+
+    boolean existsByUsername(String username);
 }
