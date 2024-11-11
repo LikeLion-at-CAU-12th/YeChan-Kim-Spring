@@ -52,6 +52,7 @@ public class MemberService {
         System.out.println("Username" + joinRequest.getUsername());
         Member member = Member.builder()
                 .username(joinRequest.getUsername())
+                .email(joinRequest.getEmail())
                 .password(bCryptPasswordEncoder.encode(joinRequest.getPassword()))
                 .build();
 

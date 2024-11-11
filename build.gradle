@@ -41,6 +41,9 @@ dependencies {
 
 	//스프링 시큐리티 추가
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//oauth 구현
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {

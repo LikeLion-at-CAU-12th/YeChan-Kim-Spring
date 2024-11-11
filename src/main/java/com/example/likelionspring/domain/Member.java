@@ -35,6 +35,10 @@ public class Member extends BaseTimeEntity {
         this.password = password;
     }
 
+    public void updateUsername(String username){
+        this.username = username;
+    }
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Playlist> playlists = new ArrayList<>();
 

@@ -75,3 +75,22 @@
 
 </div>
 </details>
+
+<details>
+<summary>5주차 과제입니다!</summary>
+<div markdown="1">
+
+- <실습> email까지 입력
+
+  <img width="916" alt="image" src="https://github.com/user-attachments/assets/c58d333c-9193-4c94-afcb-80ffaf15f195">
+
+- <실습> datagrip에서 확인된 모습
+
+  <img width="674" alt="image" src="https://github.com/user-attachments/assets/17b4fcad-2a03-47b4-909e-7b6e2da50ff7">
+
+- <실습> 이메일 중복일 때 username만 바꾸는 모습
+
+  <img width="998" alt="image" src="https://github.com/user-attachments/assets/f2126c87-f310-4c54-b4e5-4c5cbdcacb52">
+
+</div>
+</details>
