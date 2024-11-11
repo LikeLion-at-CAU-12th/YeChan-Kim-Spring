@@ -91,6 +91,6 @@
 - <실습> 이메일 중복일 때 username만 바꾸는 모습
 
   <img width="998" alt="image" src="https://github.com/user-attachments/assets/f2126c87-f310-4c54-b4e5-4c5cbdcacb52">
-
+ 
 </div>
 </details>
